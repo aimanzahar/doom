@@ -260,9 +260,11 @@
     let pointerActive = false;
     let pointerLastX = 0;
     const pointerSensitivity = 0.0035;
+    let demonTexture = null;
     let muzzle = 0;
     let hurtFlash = 0;
     let gameOver = false;
+    let win = false;
     let shotCooldown = 0;
     let time = 0;
 
@@ -273,6 +275,7 @@
       player.health = 100;
       player.dead = false;
       gameOver = false;
+      win = false;
       demons.length = 0;
       spawnDemons();
     }
@@ -287,6 +290,58 @@
         });
       });
       demonEl.textContent = demons.length;
+    }
+
+    function createDemonTexture() {
+      const size = 64;
+      const c = document.createElement("canvas");
+      c.width = c.height = size;
+      const g = c.getContext("2d");
+
+      const body = g.createRadialGradient(size * 0.5, size * 0.45, size * 0.15, size * 0.5, size * 0.45, size * 0.5);
+      body.addColorStop(0, "#b8deff");
+      body.addColorStop(1, "#4f7ab7");
+      g.fillStyle = body;
+      g.beginPath();
+      g.ellipse(size * 0.5, size * 0.55, size * 0.32, size * 0.42, 0, 0, Math.PI * 2);
+      g.fill();
+
+      // Horns
+      g.fillStyle = "#f57328";
+      g.beginPath();
+      g.moveTo(size * 0.35, size * 0.22);
+      g.lineTo(size * 0.42, size * 0.05);
+      g.lineTo(size * 0.46, size * 0.26);
+      g.closePath();
+      g.fill();
+      g.beginPath();
+      g.moveTo(size * 0.54, size * 0.26);
+      g.lineTo(size * 0.58, size * 0.05);
+      g.lineTo(size * 0.65, size * 0.22);
+      g.closePath();
+      g.fill();
+
+      // Eyes
+      g.fillStyle = "#f6f8ff";
+      g.fillRect(size * 0.34, size * 0.44, size * 0.12, size * 0.09);
+      g.fillRect(size * 0.54, size * 0.44, size * 0.12, size * 0.09);
+
+      g.fillStyle = "#05070f";
+      g.fillRect(size * 0.36, size * 0.47, size * 0.06, size * 0.04);
+      g.fillRect(size * 0.56, size * 0.47, size * 0.06, size * 0.04);
+
+      // Mouth slit
+      g.fillStyle = "rgba(5,8,15,0.85)";
+      g.fillRect(size * 0.32, size * 0.58, size * 0.36, size * 0.08);
+
+      // Highlight
+      const shine = g.createLinearGradient(0, 0, size, size);
+      shine.addColorStop(0, "rgba(255,255,255,0.2)");
+      shine.addColorStop(1, "rgba(255,255,255,0)");
+      g.fillStyle = shine;
+      g.fillRect(0, 0, size, size);
+
+      return c;
     }
 
     document.addEventListener("keydown", (e) => {
@@ -395,6 +450,7 @@
 
     function movePlayer(dt) {
       if (gameOver) return;
+      if (win) return;
       const turnSpeed = 1.8;
       if (keys["arrowleft"] || keys["q"]) player.angle -= turnSpeed * dt;
       if (keys["arrowright"] || keys["e"]) player.angle += turnSpeed * dt;
@@ -434,6 +490,7 @@
     }
 
     function updateDemons(dt) {
+      if (win) return;
       const attackRange = 0.65;
       demons.forEach((d) => {
         if (d.health <= 0) return;
@@ -486,7 +543,9 @@
         best.health -= 1;
         best.hitTimer = 0.2;
         if (best.health <= 0) {
-          demonEl.textContent = demons.filter((d) => d.health > 0).length;
+          const alive = demons.filter((d) => d.health > 0).length;
+          demonEl.textContent = alive;
+          if (alive === 0) win = true;
         }
       }
     }
@@ -551,22 +610,20 @@
         const x = screenX - size / 2;
         const y = HEIGHT / 2 - size * 0.6;
 
-        const columnIndex = Math.floor(Math.max(0, Math.min(numRays - 1, x / columnWidth)));
+        const columnIndex = Math.floor(Math.max(0, Math.min(numRays - 1, screenX / columnWidth)));
         if (depthBuffer[columnIndex] < dist - 0.1) return; // Hidden behind wall
 
         const flicker = 0.3 + Math.random() * 0.2;
-        const hurt = ref.hitTimer > 0 ? 1 : 0;
-        ctx.fillStyle = `rgba(${hurt ? "255,255,255" : "120,190,255"},${Math.max(
-          0.25,
-          1 - dist / 10 + flicker * 0.1
-        )})`;
-        ctx.beginPath();
-        ctx.ellipse(x + size / 2, y + size / 2, size * 0.35, size * 0.48, 0, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Eye slit
-        ctx.fillStyle = "rgba(5,8,15,0.9)";
-        ctx.fillRect(x + size * 0.3, y + size * 0.42, size * 0.4, size * 0.08);
+        const alpha = Math.max(0.25, 1 - dist / 10 + flicker * 0.1);
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.drawImage(demonTexture, x, y, size, size);
+        if (ref.hitTimer > 0) {
+          ctx.globalAlpha = Math.min(0.8, ref.hitTimer * 2);
+          ctx.fillStyle = "rgba(255,80,80,0.6)";
+          ctx.fillRect(x, y, size, size);
+        }
+        ctx.restore();
       });
     }
 
@@ -625,6 +682,16 @@
         ctx.fillStyle = "#9fb0c7";
         ctx.font = "18px 'Share Tech Mono', monospace";
         ctx.fillText("Press R to restart", WIDTH / 2, HEIGHT / 2 + 22);
+      } else if (win) {
+        ctx.fillStyle = "rgba(0,0,0,0.55)";
+        ctx.fillRect(0, 0, WIDTH, HEIGHT);
+        ctx.fillStyle = "#20e3b2";
+        ctx.font = "32px 'Oxanium', sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("Sector cleared!", WIDTH / 2, HEIGHT / 2 - 10);
+        ctx.fillStyle = "#9fb0c7";
+        ctx.font = "18px 'Share Tech Mono', monospace";
+        ctx.fillText("Press R to run it back", WIDTH / 2, HEIGHT / 2 + 22);
       }
 
       if (muzzle > 0) {
@@ -671,6 +738,7 @@
     }
 
     resetGame();
+    demonTexture = createDemonTexture();
     requestAnimationFrame(loop);
   </script>
 </body>
