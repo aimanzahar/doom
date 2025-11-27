@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap");
+
+    :root {
+      --bg: #0c1224;
+      --panel: rgba(255, 255, 255, 0.04);
+      --muted: #9fb0c7;
+      --text: #e7ecf5;
+      --accent: #f97316;
+      --accent-2: #20e3b2;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", "Space Grotesk", sans-serif;
+      background: radial-gradient(circle at 20% 20%, rgba(32, 227, 178, 0.15), transparent 28%),
+        radial-gradient(circle at 80% 0%, rgba(249, 115, 22, 0.16), transparent 30%),
+        linear-gradient(120deg, #0b132b 0%, #0a0f1e 50%, #0f172a 100%);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(12, 18, 36, 0.8);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .nav {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 16px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 20px rgba(32, 227, 178, 0.45);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(-1px);
+    }
+
+    nav {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .pill {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 120px 22px 80px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 36px;
+      position: relative;
+    }
+
+    .hero::after,
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 20% auto auto -10%;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(32, 227, 178, 0.2), transparent 65%);
+      filter: blur(30px);
+      z-index: 0;
+    }
+
+    .hero::after {
+      inset: auto -12% 8% auto;
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.24), transparent 65%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--accent-2);
+      font-weight: 700;
+      width: fit-content;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(42px, 5vw, 60px);
+      line-height: 1.05;
+      letter-spacing: -0.5px;
+    }
+
+    .tagline {
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 620px;
+    }
+
+    .cta {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .button {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, rgba(32, 227, 178, 0.15), rgba(249, 115, 22, 0.16));
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--muted);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
+      background: linear-gradient(135deg, rgba(32, 227, 178, 0.2), rgba(249, 115, 22, 0.2));
+    }
+
+    .hero-card {
+      position: relative;
+      padding: 26px;
+      border-radius: 20px;
+      background: var(--panel);
+      border: 1px solid var(--card-border);
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      z-index: 1;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: -40% 55% 10% -60px;
+      background: linear-gradient(135deg, rgba(32, 227, 178, 0.12), rgba(249, 115, 22, 0.12));
+      transform: rotate(-10deg);
+      filter: blur(6px);
+      opacity: 0.9;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .metric {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 26px;
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 26px 22px 70px;
+      position: relative;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .section h2 {
+      margin: 0;
+      font-size: 26px;
+      letter-spacing: -0.3px;
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    .section p {
+      color: var(--muted);
+      margin: 8px 0 0;
+      max-width: 620px;
+    }
+
+    .grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      background: var(--panel);
+      border: 1px solid var(--card-border);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(32, 227, 178, 0.35);
+    }
+
+    .card h3 {
+      margin: 6px 0 6px;
+      font-size: 20px;
+    }
+
+    .card p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .badge {
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.3px;
+      margin-bottom: 8px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .skill {
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+    }
+
+    .skill header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      position: static;
+      background: none;
+      backdrop-filter: none;
+      border: none;
+      padding: 0;
+    }
+
+    .bar {
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      width: var(--value);
+      box-shadow: 0 8px 18px rgba(32, 227, 178, 0.3);
+    }
+
+    .timeline {
+      margin-top: 22px;
+      border-left: 1px dashed rgba(255, 255, 255, 0.12);
+      padding-left: 22px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -30px;
+      top: 18px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-2), var(--accent));
+      box-shadow: 0 0 14px rgba(32, 227, 178, 0.6);
+    }
+
+    .timeline-item small {
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    form {
+      display: grid;
+      gap: 12px;
+    }
+
+    label {
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.3px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      font-size: 15px;
+      font-family: "Manrope", sans-serif;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: rgba(32, 227, 178, 0.5);
+      box-shadow: 0 0 0 4px rgba(32, 227, 178, 0.12);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    footer {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 26px 22px 60px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .floating {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-2), var(--accent));
+      filter: blur(0.5px);
+      animation: float 9s ease-in-out infinite;
+      opacity: 0.65;
+      box-shadow: 0 0 18px rgba(32, 227, 178, 0.45);
+    }
+
+    .floating:nth-child(2) {
+      animation-duration: 11s;
+      width: 12px;
+      height: 12px;
+      top: 30%;
+      left: 8%;
+    }
+
+    .floating:nth-child(3) {
+      animation-duration: 13s;
+      width: 22px;
+      height: 22px;
+      top: 60%;
+      left: 90%;
+    }
+
+    .floating:nth-child(4) {
+      animation-duration: 10s;
+      width: 14px;
+      height: 14px;
+      top: 70%;
+      left: 16%;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) translateX(0);
+      }
+      50% {
+        transform: translateY(-16px) translateX(10px);
+      }
+      100% {
+        transform: translateY(0) translateX(0);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        flex-wrap: wrap;
+      }
+      .hero {
+        padding-top: 90px;
+      }
+      .section {
+        padding-top: 0;
+      }
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand"><span></span> Creative Portfolio</div>
+      <nav>
+        <a href="#about" class="pill">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="floating" style="top:16%;left:70%;"></div>
+      <div class="floating" style="top:24%;left:24%;"></div>
+      <div class="floating" style="top:50%;left:82%;"></div>
+      <div class="floating" style="top:78%;left:32%;"></div>
+
+      <div class="hero-content">
+        <div class="eyebrow">Portfolio / 2024</div>
+        <h1>Alex Taylor — Product Designer & Frontend Engineer crafting expressive, human interfaces.</h1>
+        <p class="tagline">
+          I pair thoughtful UX with purposeful motion and engineering discipline. From concept to code,
+          I ship experiences that feel polished, fast, and memorable.
+        </p>
+        <div class="cta">
+          <a class="button" href="#projects">View Projects</a>
+          <a class="button secondary" href="#contact">Let’s talk</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="badge">Snapshot</div>
+        <p>Currently designing cohesive, high-impact product surfaces for modern web apps while building component systems that scale.</p>
+        <div class="metrics">
+          <div class="metric">
+            <strong>68+</strong>
+            <span>interfaces shipped</span>
+          </div>
+          <div class="metric">
+            <strong>24</strong>
+            <span>design systems atoms</span>
+          </div>
+          <div class="metric">
+            <strong>11</strong>
+            <span>teams supported</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="section" id="about">
+      <div class="section-header">
+        <h2>About</h2>
+        <p>Blending research-led design with pragmatic code. I prioritize clarity, accessibility, and interfaces that reward curiosity.</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="badge">Focus</div>
+          <h3>Product storytelling</h3>
+          <p>I translate ambiguous problems into crisp narratives, aligning teams around confident releases.</p>
+        </div>
+        <div class="card">
+          <div class="badge">Delivery</div>
+          <h3>Design to build</h3>
+          <p>Pairing Figma fluency with component-driven code keeps the handoff tight and the UI faithful.</p>
+        </div>
+        <div class="card">
+          <div class="badge">Impact</div>
+          <h3>Measurable outcomes</h3>
+          <p>Experiments and instrumentation ensure every release has a learning loop attached.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section-header">
+        <h2>Selected Projects</h2>
+        <p>Recent collaborations across SaaS, fintech, and creative tooling. Each blends intent with strong execution.</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="badge">SaaS · 2024</div>
+          <h3>Insight OS</h3>
+          <p>Decision intelligence workspace with adaptive dashboards, live collaboration, and a modular design system.</p>
+          <div class="stack">
+            <span class="chip">React</span>
+            <span class="chip">Typescript</span>
+            <span class="chip">Design tokens</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="badge">Fintech · 2023</div>
+          <h3>Flow Banking</h3>
+          <p>Reimagined account opening with guided flows, friction-aware forms, and humane status updates.</p>
+          <div class="stack">
+            <span class="chip">Next.js</span>
+            <span class="chip">Motion</span>
+            <span class="chip">UX research</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="badge">Creative · 2023</div>
+          <h3>Palette Studio</h3>
+          <p>Color exploration tool with generative palettes, contrast checks, and exportable theme packages.</p>
+          <div class="stack">
+            <span class="chip">WebGL</span>
+            <span class="chip">Accessibility</span>
+            <span class="chip">Storybook</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="section-header">
+        <h2>Skills</h2>
+        <p>Systems thinking plus tactile craft. Strong pairing with engineering and research.</p>
+      </div>
+      <div class="skills">
+        <div class="skill">
+          <header>
+            <strong>Interface Design</strong>
+            <span>92%</span>
+          </header>
+          <div class="bar" style="--value: 92%;"><span></span></div>
+        </div>
+        <div class="skill">
+          <header>
+            <strong>Frontend Engineering</strong>
+            <span>88%</span>
+          </header>
+          <div class="bar" style="--value: 88%;"><span></span></div>
+        </div>
+        <div class="skill">
+          <header>
+            <strong>Design Systems</strong>
+            <span>90%</span>
+          </header>
+          <div class="bar" style="--value: 90%;"><span></span></div>
+        </div>
+        <div class="skill">
+          <header>
+            <strong>Product Strategy</strong>
+            <span>82%</span>
+          </header>
+          <div class="bar" style="--value: 82%;"><span></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="section-header">
+        <h2>Experience</h2>
+        <p>Leading with clarity, collaborating with engineers, and keeping teams shipping.</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <small>2022 — Now</small>
+          <h3>Senior Product Designer · Northwind</h3>
+          <p>Owned end-to-end experience for complex analytics suite, introducing a design system that cut build time by 32%.</p>
+        </div>
+        <div class="timeline-item">
+          <small>2019 — 2022</small>
+          <h3>Product Engineer · Waveform</h3>
+          <p>Prototyped interactions in code, launched motion patterns, and delivered responsive layouts across platforms.</p>
+        </div>
+        <div class="timeline-item">
+          <small>2016 — 2019</small>
+          <h3>UX Designer · Studio Orbit</h3>
+          <p>Worked with cross-functional teams on research-driven redesigns for finance, retail, and creative clients.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="section-header">
+        <h2>Contact</h2>
+        <p>Ready to collaborate or need a fresh set of eyes? Send a note.</p>
+      </div>
+      <div class="contact">
+        <div class="card">
+          <div class="badge">Availability</div>
+          <h3>Freelance & product partnerships</h3>
+          <p>Based in Berlin. Open to remote-first teams and short onsite sprints.</p>
+          <div class="stack">
+            <span class="chip">UX strategy</span>
+            <span class="chip">Prototyping</span>
+            <span class="chip">Design systems</span>
+          </div>
+        </div>
+        <div class="card">
+          <form>
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" required>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Project details or questions" required></textarea>
+            <button class="button" type="submit">Send message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2024 Alex Taylor — Let’s build something intentional.</span>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <a href="mailto:alex.taylor@example.com" style="color:var(--muted);text-decoration:none;">Email</a>
+      <a href="https://www.linkedin.com" style="color:var(--muted);text-decoration:none;">LinkedIn</a>
+      <a href="https://www.dribbble.com" style="color:var(--muted);text-decoration:none;">Dribbble</a>
+    </div>
+  </footer>
+</body>
+</html>
