@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neon Doom Mini</title>
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@500;600&display=swap");
 
     :root {
-      --bg: #0c1224;
-      --panel: rgba(255, 255, 255, 0.04);
+      --bg-1: #0a0f24;
+      --bg-2: #0b122d;
+      --accent: #f57328;
+      --accent-2: #20e3b2;
       --muted: #9fb0c7;
       --text: #e7ecf5;
-      --accent: #f97316;
-      --accent-2: #20e3b2;
-      --card-border: rgba(255, 255, 255, 0.08);
-      --shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
     }
 
     * {
@@ -24,880 +22,143 @@
 
     body {
       margin: 0;
-      font-family: "Manrope", "Space Grotesk", sans-serif;
-      background: radial-gradient(circle at 20% 20%, rgba(32, 227, 178, 0.15), transparent 28%),
-        radial-gradient(circle at 80% 0%, rgba(249, 115, 22, 0.16), transparent 30%),
-        linear-gradient(120deg, #0b132b 0%, #0a0f1e 50%, #0f172a 100%);
-      color: var(--text);
-      line-height: 1.7;
       min-height: 100vh;
-      scroll-behavior: smooth;
-      overflow-x: hidden;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(10px);
-      background: rgba(12, 18, 36, 0.8);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .nav {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 16px 22px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .brand {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+      justify-content: center;
+      background: radial-gradient(circle at 20% 20%, rgba(32, 227, 178, 0.14), transparent 32%),
+        radial-gradient(circle at 80% 0%, rgba(245, 115, 40, 0.16), transparent 28%),
+        linear-gradient(135deg, var(--bg-1) 0%, #060915 42%, var(--bg-2) 100%);
       color: var(--text);
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
+      font-family: "Manrope", "Space Grotesk", system-ui, -apple-system, sans-serif;
+      padding: 24px;
     }
 
-    .brand span {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow: 0 0 20px rgba(32, 227, 178, 0.45);
-    }
-
-    nav a {
-      text-decoration: none;
-      color: var(--muted);
-      font-weight: 600;
-      font-size: 14px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
-    }
-
-    nav a:hover {
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.06);
-      transform: translateY(-1px);
-    }
-
-    nav {
-      display: flex;
-      gap: 6px;
-      align-items: center;
-    }
-
-    .pill {
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    .hero {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 120px 22px 80px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 36px;
-      position: relative;
-    }
-
-    .hero::after,
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 20% auto auto -10%;
-      width: 180px;
-      height: 180px;
-      background: radial-gradient(circle, rgba(32, 227, 178, 0.2), transparent 65%);
-      filter: blur(30px);
-      z-index: 0;
-    }
-
-    .hero::after {
-      inset: auto -12% 8% auto;
-      background: radial-gradient(circle, rgba(249, 115, 22, 0.24), transparent 65%);
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .profile-meta {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .avatar {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, 0.14);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
-      background: rgba(255, 255, 255, 0.05);
+    .card {
+      width: min(880px, 100%);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+      backdrop-filter: blur(8px);
     }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
+      gap: 10px;
+      padding: 8px 14px;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.08);
-      color: var(--accent-2);
-      font-weight: 700;
-      width: fit-content;
       letter-spacing: 0.6px;
+      font-weight: 700;
       text-transform: uppercase;
       font-size: 12px;
+      color: var(--accent-2);
+      margin-bottom: 16px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 14px rgba(32, 227, 178, 0.6);
     }
 
     h1 {
-      margin: 0;
+      margin: 0 0 12px;
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(42px, 5vw, 60px);
-      line-height: 1.05;
+      font-size: clamp(42px, 5vw, 64px);
       letter-spacing: -0.5px;
     }
 
     .tagline {
       color: var(--muted);
       font-size: 18px;
-      max-width: 620px;
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 28px;
     }
 
-    .cta {
+    .actions {
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
-      margin-top: 12px;
+      align-items: center;
     }
 
     .button {
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 12px 16px;
-      border-radius: 999px;
-      font-weight: 700;
-      text-decoration: none;
-      color: var(--text);
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: linear-gradient(135deg, rgba(32, 227, 178, 0.15), rgba(249, 115, 22, 0.16));
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-    }
-
-    .button.secondary {
-      background: transparent;
-      color: var(--muted);
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      background: linear-gradient(135deg, rgba(32, 227, 178, 0.14), rgba(245, 115, 40, 0.16));
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.45);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border 0.15s ease;
     }
 
     .button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
-      background: linear-gradient(135deg, rgba(32, 227, 178, 0.2), rgba(249, 115, 22, 0.2));
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.55);
+      border-color: rgba(255, 255, 255, 0.3);
     }
 
-    .hero-card {
-      position: relative;
-      padding: 26px;
-      border-radius: 20px;
-      background: var(--panel);
-      border: 1px solid var(--card-border);
-      overflow: hidden;
-      backdrop-filter: blur(12px);
-      box-shadow: var(--shadow);
-      z-index: 1;
-    }
-
-    .hero-card::after {
-      content: "";
-      position: absolute;
-      inset: -40% 55% 10% -60px;
-      background: linear-gradient(135deg, rgba(32, 227, 178, 0.12), rgba(249, 115, 22, 0.12));
-      transform: rotate(-10deg);
-      filter: blur(6px);
-      opacity: 0.9;
-    }
-
-    .metrics {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 12px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .metric {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 14px;
-    }
-
-    .metric strong {
-      display: block;
-      font-size: 26px;
-      font-family: "Space Grotesk", sans-serif;
-    }
-
-    .metric span {
+    .ghost {
+      background: rgba(255, 255, 255, 0.05);
       color: var(--muted);
-      font-size: 13px;
-    }
-
-    .section {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 26px 22px 70px;
-      position: relative;
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .section h2 {
-      margin: 0;
-      font-size: 26px;
-      letter-spacing: -0.3px;
-      font-family: "Space Grotesk", sans-serif;
-    }
-
-    .section p {
-      color: var(--muted);
-      margin: 8px 0 0;
-      max-width: 620px;
     }
 
     .grid {
-      margin-top: 24px;
+      margin-top: 32px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 18px;
     }
 
-    .card {
-      position: relative;
-      overflow: hidden;
-      border-radius: 18px;
-      background: var(--panel);
-      border: 1px solid var(--card-border);
-      padding: 18px;
-      box-shadow: var(--shadow);
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(32, 227, 178, 0.35);
-    }
-
-    a.card {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .card h3 {
-      margin: 6px 0 6px;
-      font-size: 20px;
-    }
-
-    .card p {
-      margin: 4px 0 0;
+    .pill {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 14px;
       color: var(--muted);
+      line-height: 1.5;
       font-size: 14px;
-    }
-
-    .badge {
-      display: inline-flex;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      color: var(--muted);
-      font-weight: 700;
-      font-size: 12px;
-      letter-spacing: 0.3px;
-      margin-bottom: 8px;
-      background: rgba(255, 255, 255, 0.04);
-    }
-
-    .stack {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .chip {
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--card-border);
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    a.chip {
-      color: inherit;
-      text-decoration: none;
-      display: inline-flex;
+      gap: 10px;
       align-items: center;
-      gap: 6px;
     }
 
-    .skills {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-      margin-top: 22px;
-    }
-
-    .skill {
-      padding: 14px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--card-border);
-    }
-
-    .skill header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-      position: static;
-      background: none;
-      backdrop-filter: none;
-      border: none;
-      padding: 0;
-    }
-
-    .bar {
-      height: 8px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.08);
-      overflow: hidden;
-    }
-
-    .bar span {
-      display: block;
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      width: var(--value);
-      box-shadow: 0 8px 18px rgba(32, 227, 178, 0.3);
-    }
-
-    .timeline {
-      margin-top: 22px;
-      border-left: 1px dashed rgba(255, 255, 255, 0.12);
-      padding-left: 22px;
-      display: grid;
-      gap: 16px;
-    }
-
-    .timeline-item {
-      position: relative;
-      padding: 14px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--card-border);
-    }
-
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      left: -30px;
-      top: 18px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent-2), var(--accent));
-      box-shadow: 0 0 14px rgba(32, 227, 178, 0.6);
-    }
-
-    .timeline-item small {
-      color: var(--muted);
-      font-weight: 700;
-      letter-spacing: 0.3px;
-      text-transform: uppercase;
-    }
-
-    .contact {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 18px;
-      margin-top: 22px;
-    }
-
-    form {
-      display: grid;
-      gap: 12px;
-    }
-
-    label {
-      font-weight: 700;
-      font-size: 13px;
-      letter-spacing: 0.3px;
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      padding: 12px;
-      border-radius: 12px;
-      border: 1px solid var(--card-border);
-      background: rgba(255, 255, 255, 0.04);
+    .pill strong {
       color: var(--text);
-      font-size: 15px;
-      font-family: "Manrope", sans-serif;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    input:focus,
-    textarea:focus {
-      outline: none;
-      border-color: rgba(32, 227, 178, 0.5);
-      box-shadow: 0 0 0 4px rgba(32, 227, 178, 0.12);
-    }
-
-    textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-
-    footer {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 26px 22px 60px;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .floating {
-      position: absolute;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent-2), var(--accent));
-      filter: blur(0.5px);
-      animation: float 9s ease-in-out infinite;
-      opacity: 0.65;
-      box-shadow: 0 0 18px rgba(32, 227, 178, 0.45);
-    }
-
-    .floating:nth-child(2) {
-      animation-duration: 11s;
-      width: 12px;
-      height: 12px;
-      top: 30%;
-      left: 8%;
-    }
-
-    .floating:nth-child(3) {
-      animation-duration: 13s;
-      width: 22px;
-      height: 22px;
-      top: 60%;
-      left: 90%;
-    }
-
-    .floating:nth-child(4) {
-      animation-duration: 10s;
-      width: 14px;
-      height: 14px;
-      top: 70%;
-      left: 16%;
-    }
-
-    @keyframes float {
-      0% {
-        transform: translateY(0) translateX(0);
-      }
-      50% {
-        transform: translateY(-16px) translateX(10px);
-      }
-      100% {
-        transform: translateY(0) translateX(0);
-      }
-    }
-
-    @media (max-width: 680px) {
-      .nav {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      nav {
-        flex-wrap: wrap;
-      }
-      .hero {
-        padding-top: 90px;
-      }
-      .section {
-        padding-top: 0;
-      }
-      footer {
-        flex-direction: column;
-        align-items: flex-start;
-      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="nav">
-      <div class="brand"><span></span> Aiman · GitHub</div>
-      <nav>
-        <a href="#about" class="pill">About</a>
-        <a href="#projects">Repositories</a>
-        <a href="#skills">Languages</a>
-        <a href="#experience">Highlights</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <div class="hero">
-      <div class="floating" style="top:16%;left:70%;"></div>
-      <div class="floating" style="top:24%;left:24%;"></div>
-      <div class="floating" style="top:50%;left:82%;"></div>
-      <div class="floating" style="top:78%;left:32%;"></div>
-
-      <div class="hero-content">
-        <div class="eyebrow">GitHub profile · live</div>
-        <div class="profile-meta">
-          <img id="avatar" class="avatar" src="https://avatars.githubusercontent.com/u/6382156?v=4" alt="Aiman on GitHub">
-          <div>
-            <h1 id="hero-name">Aiman — @aimanzahar</h1>
-            <p class="tagline" id="tagline">
-              Shipping experiments, tools, and hobby projects across the stack. This page pulls live data from the GitHub profile so repos and languages stay current.
-            </p>
-          </div>
-        </div>
-        <div class="cta">
-          <a class="button" href="https://github.com/aimanzahar" target="_blank" rel="noreferrer">View GitHub</a>
-          <a class="button secondary" href="#projects">See repositories</a>
-        </div>
-      </div>
-
-      <div class="hero-card">
-        <div class="badge">Live snapshot</div>
-        <p id="hero-description">Loading public repos, followers, and language mix...</p>
-        <div class="metrics">
-          <div class="metric">
-            <strong id="repo-count">--</strong>
-            <span>Public repos</span>
-          </div>
-          <div class="metric">
-            <strong id="followers-count">--</strong>
-            <span>Followers</span>
-          </div>
-          <div class="metric">
-            <strong id="language-count">--</strong>
-            <span>Languages spotted</span>
-          </div>
-        </div>
-      </div>
+  <div class="card">
+    <div class="eyebrow"><span class="dot"></span> Launch Bay</div>
+    <h1>Neon Doom Mini</h1>
+    <p class="tagline">
+      A tiny ray-casting shooter built for the browser. Move, sprint, and blast demons in a neon maze. Works with
+      keyboard or touch: drag to look, tap or space to fire.
+    </p>
+    <div class="actions">
+      <a class="button" href="./doom.html">▶ Play the game</a>
+      <a class="button ghost" href="https://vs.zahar.my/doom.html" target="_blank" rel="noopener">If hosted, open direct</a>
     </div>
 
-    <section class="section" id="about">
-      <div class="section-header">
-        <h2>About @aimanzahar</h2>
-        <p>Quick snapshot of the GitHub footprint: experiments, utilities, and open-source tinkering across several languages.</p>
-      </div>
-      <div class="grid">
-        <div class="card">
-          <div class="badge">Builder</div>
-          <h3>Hands-on projects</h3>
-          <p>Frequent, lightweight repos for trying ideas fast—bots, Android work, Minecraft mods, and web starters.</p>
-        </div>
-        <div class="card">
-          <div class="badge">Stack</div>
-          <h3>Polyglot</h3>
-          <p>TypeScript, Kotlin, PHP, Python, Java, and more—picking the right tool for each experiment.</p>
-        </div>
-        <div class="card">
-          <div class="badge">Community</div>
-          <h3>Open by default</h3>
-          <p>Public repos, forks, and contributions that invite others to explore and build on top.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="projects">
-      <div class="section-header">
-        <h2>Repositories</h2>
-        <p>Top public repos from GitHub, sorted by stars and recent updates. Click any card to open it on GitHub.</p>
-      </div>
-      <div class="grid" id="projects-grid">
-        <div class="card">
-          <div class="badge">Loading</div>
-          <h3>Fetching live data...</h3>
-          <p>This pulls from repos.json (fallback) or the GitHub API.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="skills">
-      <div class="section-header">
-        <h2>Languages</h2>
-        <p>Mix of languages across the public repositories. Percentages are relative to the most-used language.</p>
-      </div>
-      <div class="skills" id="skills-grid">
-        <div class="skill">
-          <header>
-            <strong>Loading</strong>
-            <span>--</span>
-          </header>
-          <div class="bar" style="--value: 45%;"><span></span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="experience">
-      <div class="section-header">
-        <h2>Highlights</h2>
-        <p>Milestones and activity pulled from the GitHub profile and repository history.</p>
-      </div>
-      <div class="timeline">
-        <div class="timeline-item">
-          <small>2014 — now</small>
-          <h3>Joined GitHub as @aimanzahar</h3>
-          <p>Experimenting in public with open-source projects and forks.</p>
-        </div>
-        <div class="timeline-item">
-          <small>Recent</small>
-          <h3>Active across languages</h3>
-          <p>TypeScript, Kotlin, PHP, Java, and Python projects updated throughout 2023–2025.</p>
-        </div>
-        <div class="timeline-item">
-          <small>Public work</small>
-          <h3><span id="public-repo-count">37</span> public repositories</h3>
-          <p>Utilities, mods, bots, and web starters that others can explore or reuse.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="contact">
-      <div class="section-header">
-        <h2>Contact</h2>
-        <p>Want to collaborate or share feedback on a repo? Reach out via GitHub or send a quick note.</p>
-      </div>
-      <div class="contact">
-        <div class="card">
-          <div class="badge">GitHub</div>
-          <h3>Follow or open an issue</h3>
-          <p>Best place to connect is the GitHub profile for @aimanzahar.</p>
-          <div class="stack">
-            <a class="chip" href="https://github.com/aimanzahar" target="_blank" rel="noreferrer">Profile</a>
-            <a class="chip" href="https://github.com/aimanzahar?tab=repositories" target="_blank" rel="noreferrer">Repositories</a>
-          </div>
-        </div>
-        <div class="card">
-          <form>
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" placeholder="Your name" required>
-            <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Drop a note; include a repo link or context." required></textarea>
-            <button class="button" type="submit">Send message</button>
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <span>© 2024 Aiman — Data pulled from github.com/aimanzahar.</span>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;">
-      <a href="https://github.com/aimanzahar" style="color:var(--muted);text-decoration:none;" target="_blank" rel="noreferrer">GitHub</a>
-      <a href="https://github.com/aimanzahar?tab=repositories" style="color:var(--muted);text-decoration:none;" target="_blank" rel="noreferrer">Repositories</a>
+    <div class="grid">
+      <div class="pill"><strong>Controls:</strong> WASD to move, arrows to turn, space/tap to shoot, drag to look, shift to sprint, R to restart</div>
+      <div class="pill"><strong>Tip:</strong> Load via Live Server and open <code>/doom.html</code> under the served root.</div>
+      <div class="pill"><strong>Device:</strong> Touch-friendly: swipe on the canvas to rotate, tap to fire.</div>
     </div>
-  </footer>
-
-  <script>
-    (async () => {
-      const heroName = document.getElementById("hero-name");
-      const tagline = document.getElementById("tagline");
-      const heroDescription = document.getElementById("hero-description");
-      const repoCount = document.getElementById("repo-count");
-      const followersCount = document.getElementById("followers-count");
-      const languageCount = document.getElementById("language-count");
-      const publicRepoCount = document.getElementById("public-repo-count");
-      const avatar = document.getElementById("avatar");
-      const projectsGrid = document.getElementById("projects-grid");
-      const skillsGrid = document.getElementById("skills-grid");
-
-      const fallbackProfile = { public_repos: 37, followers: 0, name: "Aiman", login: "aimanzahar" };
-
-      async function fetchJSON(url) {
-        const res = await fetch(url);
-        if (!res.ok) throw new Error(`Request failed: ${res.status}`);
-        return res.json();
-      }
-
-      async function loadProfile() {
-        try {
-          return await fetchJSON("https://api.github.com/users/aimanzahar");
-        } catch (err) {
-          return fallbackProfile;
-        }
-      }
-
-      async function loadRepos() {
-        try {
-          return await fetchJSON("repos.json");
-        } catch (_) {
-          try {
-            return await fetchJSON("https://api.github.com/users/aimanzahar/repos?per_page=100&sort=updated");
-          } catch (err) {
-            return [];
-          }
-        }
-      }
-
-      function formatDate(value) {
-        const date = new Date(value);
-        if (Number.isNaN(date.getTime())) return "—";
-        return date.toLocaleString("en", { month: "short", year: "numeric" });
-      }
-
-      function renderProfile(profile, repos) {
-        const languages = new Set(repos.map((repo) => repo.language).filter(Boolean));
-        if (heroDescription) {
-          heroDescription.textContent = "Public repos, followers, and languages sourced directly from GitHub.";
-        }
-        if (heroName) {
-          heroName.textContent = `${profile.name || "Aiman"} — @${profile.login || "aimanzahar"}`;
-        }
-        if (tagline) {
-          tagline.textContent = `Open-source projects, forks, and experiments maintained by @${profile.login || "aimanzahar"}.`;
-        }
-        if (repoCount) repoCount.textContent = profile.public_repos ?? repos.length ?? 0;
-        if (followersCount) followersCount.textContent = profile.followers ?? 0;
-        if (languageCount) languageCount.textContent = languages.size || "—";
-        if (publicRepoCount) publicRepoCount.textContent = profile.public_repos ?? repos.length ?? 0;
-        if (avatar && profile.avatar_url) avatar.src = profile.avatar_url;
-      }
-
-      function renderRepos(repos) {
-        if (!projectsGrid) return;
-        projectsGrid.innerHTML = "";
-        const ownRepos = repos.filter((repo) => !repo.fork);
-
-        if (!ownRepos.length) {
-          const empty = document.createElement("div");
-          empty.className = "card";
-          empty.innerHTML = '<div class="badge">No data</div><h3>No repositories found</h3><p>Unable to load repository data right now.</p>';
-          projectsGrid.appendChild(empty);
-          return;
-        }
-
-        const sorted = [...ownRepos]
-          .sort((a, b) => {
-            const starDiff = (b.stargazers_count || 0) - (a.stargazers_count || 0);
-            if (starDiff !== 0) return starDiff;
-            const timeA = new Date(a.pushed_at || a.updated_at || 0).getTime() || 0;
-            const timeB = new Date(b.pushed_at || b.updated_at || 0).getTime() || 0;
-            return timeB - timeA;
-          })
-          .slice(0, 6);
-
-        sorted.forEach((repo) => {
-          const card = document.createElement("a");
-          card.className = "card";
-          card.href = repo.html_url || "#";
-          card.target = "_blank";
-          card.rel = "noreferrer";
-          const desc = repo.description || "No description provided.";
-          const language = repo.language || "Repository";
-          const updated = repo.pushed_at ? formatDate(repo.pushed_at) : "—";
-
-          card.innerHTML = `
-            <div class="badge">${language}</div>
-            <h3>${repo.name}</h3>
-            <p>${desc}</p>
-            <div class="stack">
-              <span class="chip">⭐ ${repo.stargazers_count || 0}</span>
-              <span class="chip">Forks ${repo.forks_count || 0}</span>
-              <span class="chip">Updated ${updated}</span>
-            </div>
-          `;
-          projectsGrid.appendChild(card);
-        });
-      }
-
-      function renderLanguages(repos) {
-        if (!skillsGrid) return;
-        skillsGrid.innerHTML = "";
-        const counts = repos.reduce((acc, repo) => {
-          if (!repo.language) return acc;
-          acc[repo.language] = (acc[repo.language] || 0) + 1;
-          return acc;
-        }, {});
-        const entries = Object.entries(counts)
-          .sort((a, b) => b[1] - a[1])
-          .slice(0, 6);
-        const max = entries[0]?.[1] || 1;
-
-        if (!entries.length) {
-          const card = document.createElement("div");
-          card.className = "skill";
-          card.innerHTML = '<header><strong>No data</strong><span>--</span></header><div class="bar" style="--value: 40%;"><span></span></div>';
-          skillsGrid.appendChild(card);
-          return;
-        }
-
-        entries.forEach(([lang, count]) => {
-          const percent = Math.round((count / max) * 100);
-          const skill = document.createElement("div");
-          skill.className = "skill";
-          skill.innerHTML = `
-            <header>
-              <strong>${lang}</strong>
-              <span>${count} repos</span>
-            </header>
-            <div class="bar" style="--value: ${percent}%;">
-              <span></span>
-            </div>
-          `;
-          skillsGrid.appendChild(skill);
-        });
-      }
-
-      try {
-        const [profile, repos] = await Promise.all([loadProfile(), loadRepos()]);
-        const ownRepos = repos.filter((repo) => !repo.fork);
-        renderProfile(profile, ownRepos);
-        renderRepos(ownRepos);
-        renderLanguages(ownRepos);
-      } catch (err) {
-        console.error("Failed to load GitHub data", err);
-      }
-    })();
-  </script>
+  </div>
 </body>
 </html>
