@@ -298,45 +298,85 @@
       c.width = c.height = size;
       const g = c.getContext("2d");
 
-      const body = g.createRadialGradient(size * 0.5, size * 0.45, size * 0.15, size * 0.5, size * 0.45, size * 0.5);
-      body.addColorStop(0, "#b8deff");
-      body.addColorStop(1, "#4f7ab7");
+      const body = g.createRadialGradient(size * 0.5, size * 0.5, size * 0.12, size * 0.5, size * 0.5, size * 0.48);
+      body.addColorStop(0, "#a0182a");
+      body.addColorStop(1, "#2b0610");
       g.fillStyle = body;
       g.beginPath();
-      g.ellipse(size * 0.5, size * 0.55, size * 0.32, size * 0.42, 0, 0, Math.PI * 2);
+      g.ellipse(size * 0.5, size * 0.56, size * 0.34, size * 0.44, 0, 0, Math.PI * 2);
       g.fill();
 
-      // Horns
-      g.fillStyle = "#f57328";
+      // Horns (darker, pointier)
+      g.fillStyle = "#7a1a0f";
       g.beginPath();
-      g.moveTo(size * 0.35, size * 0.22);
-      g.lineTo(size * 0.42, size * 0.05);
-      g.lineTo(size * 0.46, size * 0.26);
+      g.moveTo(size * 0.35, size * 0.26);
+      g.lineTo(size * 0.43, size * 0.02);
+      g.lineTo(size * 0.48, size * 0.28);
       g.closePath();
       g.fill();
       g.beginPath();
-      g.moveTo(size * 0.54, size * 0.26);
-      g.lineTo(size * 0.58, size * 0.05);
-      g.lineTo(size * 0.65, size * 0.22);
+      g.moveTo(size * 0.52, size * 0.28);
+      g.lineTo(size * 0.57, size * 0.02);
+      g.lineTo(size * 0.65, size * 0.26);
       g.closePath();
       g.fill();
 
-      // Eyes
-      g.fillStyle = "#f6f8ff";
-      g.fillRect(size * 0.34, size * 0.44, size * 0.12, size * 0.09);
-      g.fillRect(size * 0.54, size * 0.44, size * 0.12, size * 0.09);
+      // Angry brows
+      g.fillStyle = "#0a0102";
+      g.beginPath();
+      g.moveTo(size * 0.30, size * 0.43);
+      g.lineTo(size * 0.46, size * 0.38);
+      g.lineTo(size * 0.47, size * 0.44);
+      g.lineTo(size * 0.31, size * 0.48);
+      g.closePath();
+      g.fill();
+      g.beginPath();
+      g.moveTo(size * 0.70, size * 0.43);
+      g.lineTo(size * 0.54, size * 0.38);
+      g.lineTo(size * 0.53, size * 0.44);
+      g.lineTo(size * 0.69, size * 0.48);
+      g.closePath();
+      g.fill();
 
-      g.fillStyle = "#05070f";
-      g.fillRect(size * 0.36, size * 0.47, size * 0.06, size * 0.04);
-      g.fillRect(size * 0.56, size * 0.47, size * 0.06, size * 0.04);
+      // Eyes (slanted, glowing)
+      g.fillStyle = "#ffddbb";
+      g.beginPath();
+      g.moveTo(size * 0.32, size * 0.45);
+      g.lineTo(size * 0.45, size * 0.41);
+      g.lineTo(size * 0.45, size * 0.48);
+      g.lineTo(size * 0.32, size * 0.52);
+      g.closePath();
+      g.fill();
+      g.beginPath();
+      g.moveTo(size * 0.68, size * 0.45);
+      g.lineTo(size * 0.55, size * 0.41);
+      g.lineTo(size * 0.55, size * 0.48);
+      g.lineTo(size * 0.68, size * 0.52);
+      g.closePath();
+      g.fill();
 
-      // Mouth slit
-      g.fillStyle = "rgba(5,8,15,0.85)";
-      g.fillRect(size * 0.32, size * 0.58, size * 0.36, size * 0.08);
+      g.fillStyle = "#1b0202";
+      g.fillRect(size * 0.36, size * 0.46, size * 0.06, size * 0.05);
+      g.fillRect(size * 0.58, size * 0.46, size * 0.06, size * 0.05);
 
-      // Highlight
+      // Mouth with teeth
+      g.fillStyle = "#1a0406";
+      g.fillRect(size * 0.30, size * 0.60, size * 0.40, size * 0.12);
+      g.fillStyle = "#f5f1e8";
+      const teeth = 6;
+      for (let i = 0; i < teeth; i++) {
+        const tX = size * 0.30 + (i / teeth) * size * 0.40;
+        g.beginPath();
+        g.moveTo(tX, size * 0.60);
+        g.lineTo(tX + size * 0.04, size * 0.60);
+        g.lineTo(tX + size * 0.02, size * 0.68);
+        g.closePath();
+        g.fill();
+      }
+
+      // Subtle highlight
       const shine = g.createLinearGradient(0, 0, size, size);
-      shine.addColorStop(0, "rgba(255,255,255,0.2)");
+      shine.addColorStop(0, "rgba(255,255,255,0.14)");
       shine.addColorStop(1, "rgba(255,255,255,0)");
       g.fillStyle = shine;
       g.fillRect(0, 0, size, size);
