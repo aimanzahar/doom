@@ -1,164 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Neon Doom Mini</title>
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@500;600&display=swap");
-
-    :root {
-      --bg-1: #0a0f24;
-      --bg-2: #0b122d;
-      --accent: #f57328;
-      --accent-2: #20e3b2;
-      --muted: #9fb0c7;
-      --text: #e7ecf5;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle at 20% 20%, rgba(32, 227, 178, 0.14), transparent 32%),
-        radial-gradient(circle at 80% 0%, rgba(245, 115, 40, 0.16), transparent 28%),
-        linear-gradient(135deg, var(--bg-1) 0%, #060915 42%, var(--bg-2) 100%);
-      color: var(--text);
-      font-family: "Manrope", "Space Grotesk", system-ui, -apple-system, sans-serif;
-      padding: 24px;
-    }
-
-    .card {
-      width: min(880px, 100%);
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 20px;
-      padding: 32px;
-      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
-      backdrop-filter: blur(8px);
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.08);
-      letter-spacing: 0.6px;
-      font-weight: 700;
-      text-transform: uppercase;
-      font-size: 12px;
-      color: var(--accent-2);
-      margin-bottom: 16px;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow: 0 0 14px rgba(32, 227, 178, 0.6);
-    }
-
-    h1 {
-      margin: 0 0 12px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(42px, 5vw, 64px);
-      letter-spacing: -0.5px;
-    }
-
-    .tagline {
-      color: var(--muted);
-      font-size: 18px;
-      max-width: 640px;
-      line-height: 1.7;
-      margin-bottom: 28px;
-    }
-
-    .actions {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 18px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 700;
-      letter-spacing: 0.4px;
-      background: linear-gradient(135deg, rgba(32, 227, 178, 0.14), rgba(245, 115, 40, 0.16));
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.45);
-      transition: transform 0.15s ease, box-shadow 0.15s ease, border 0.15s ease;
-    }
-
-    .button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.55);
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    .ghost {
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--muted);
-    }
-
-    .grid {
-      margin-top: 32px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 18px;
-    }
-
-    .pill {
-      background: rgba(0, 0, 0, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
-      padding: 14px;
-      color: var(--muted);
-      line-height: 1.5;
-      font-size: 14px;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .pill strong {
-      color: var(--text);
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PixiCraft - HTML5 Voxel Demo</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/8.1.2/pixi.min.js" integrity="sha512-2hLCZBavPMzzw3R3cndqRr2R1kU1IV6e9aPFQRpP+qVDQJybfFVCd48kvQIqwY1QjLZG8pn22KXbjWAPMl3d0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
-  <div class="card">
-    <div class="eyebrow"><span class="dot"></span> Launch Bay</div>
-    <h1>Neon Doom Mini</h1>
-    <p class="tagline">
-      A tiny ray-casting shooter built for the browser. Move, sprint, and blast demons in a neon maze. Works with
-      keyboard or touch: drag to look, tap or space to fire.
-    </p>
-    <div class="actions">
-      <a class="button" href="./doom.html">▶ Play the game</a>
-      <a class="button ghost" href="https://vs.zahar.my/doom.html" target="_blank" rel="noopener">If hosted, open direct</a>
-    </div>
+  <div id="game"></div>
 
-    <div class="grid">
-      <div class="pill"><strong>Controls:</strong> WASD to move, arrows to turn, space/tap to shoot, drag to look, shift to sprint, R to restart</div>
-      <div class="pill"><strong>Tip:</strong> Load via Live Server and open <code>/doom.html</code> under the served root.</div>
-      <div class="pill"><strong>Device:</strong> Touch-friendly: swipe on the canvas to rotate, tap to fire.</div>
+  <div id="ui">
+    <div id="title">PixiCraft</div>
+    <div id="hotbar"></div>
+    <div id="debug"></div>
+    <div id="help">
+      <div>WASD: move | Space: jump | Shift: sneak</div>
+      <div>Q / E: rotate camera | Scroll: select block</div>
+      <div>Left click: mine | Right click: place | R: regenerate world</div>
     </div>
   </div>
+
+  <div id="crosshair"></div>
+
+  <script src="main.js"></script>
 </body>
 </html>
