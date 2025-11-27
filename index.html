@@ -135,6 +135,22 @@
       gap: 18px;
     }
 
+    .profile-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
     .eyebrow {
       display: inline-flex;
       align-items: center;
@@ -296,6 +312,11 @@
       border-color: rgba(32, 227, 178, 0.35);
     }
 
+    a.card {
+      color: inherit;
+      text-decoration: none;
+    }
+
     .card h3 {
       margin: 6px 0 6px;
       font-size: 20px;
@@ -334,6 +355,14 @@
       border: 1px solid var(--card-border);
       color: var(--muted);
       font-size: 13px;
+    }
+
+    a.chip {
+      color: inherit;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .skills {
@@ -540,12 +569,12 @@
 <body>
   <header>
     <div class="nav">
-      <div class="brand"><span></span> Creative Portfolio</div>
+      <div class="brand"><span></span> Aiman · GitHub</div>
       <nav>
         <a href="#about" class="pill">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#experience">Experience</a>
+        <a href="#projects">Repositories</a>
+        <a href="#skills">Languages</a>
+        <a href="#experience">Highlights</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
@@ -559,33 +588,37 @@
       <div class="floating" style="top:78%;left:32%;"></div>
 
       <div class="hero-content">
-        <div class="eyebrow">Portfolio / 2024</div>
-        <h1>Alex Taylor — Product Designer & Frontend Engineer crafting expressive, human interfaces.</h1>
-        <p class="tagline">
-          I pair thoughtful UX with purposeful motion and engineering discipline. From concept to code,
-          I ship experiences that feel polished, fast, and memorable.
-        </p>
+        <div class="eyebrow">GitHub profile · live</div>
+        <div class="profile-meta">
+          <img id="avatar" class="avatar" src="https://avatars.githubusercontent.com/u/6382156?v=4" alt="Aiman on GitHub">
+          <div>
+            <h1 id="hero-name">Aiman — @aimanzahar</h1>
+            <p class="tagline" id="tagline">
+              Shipping experiments, tools, and hobby projects across the stack. This page pulls live data from the GitHub profile so repos and languages stay current.
+            </p>
+          </div>
+        </div>
         <div class="cta">
-          <a class="button" href="#projects">View Projects</a>
-          <a class="button secondary" href="#contact">Let’s talk</a>
+          <a class="button" href="https://github.com/aimanzahar" target="_blank" rel="noreferrer">View GitHub</a>
+          <a class="button secondary" href="#projects">See repositories</a>
         </div>
       </div>
 
       <div class="hero-card">
-        <div class="badge">Snapshot</div>
-        <p>Currently designing cohesive, high-impact product surfaces for modern web apps while building component systems that scale.</p>
+        <div class="badge">Live snapshot</div>
+        <p id="hero-description">Loading public repos, followers, and language mix...</p>
         <div class="metrics">
           <div class="metric">
-            <strong>68+</strong>
-            <span>interfaces shipped</span>
+            <strong id="repo-count">--</strong>
+            <span>Public repos</span>
           </div>
           <div class="metric">
-            <strong>24</strong>
-            <span>design systems atoms</span>
+            <strong id="followers-count">--</strong>
+            <span>Followers</span>
           </div>
           <div class="metric">
-            <strong>11</strong>
-            <span>teams supported</span>
+            <strong id="language-count">--</strong>
+            <span>Languages spotted</span>
           </div>
         </div>
       </div>
@@ -593,124 +626,78 @@
 
     <section class="section" id="about">
       <div class="section-header">
-        <h2>About</h2>
-        <p>Blending research-led design with pragmatic code. I prioritize clarity, accessibility, and interfaces that reward curiosity.</p>
+        <h2>About @aimanzahar</h2>
+        <p>Quick snapshot of the GitHub footprint: experiments, utilities, and open-source tinkering across several languages.</p>
       </div>
       <div class="grid">
         <div class="card">
-          <div class="badge">Focus</div>
-          <h3>Product storytelling</h3>
-          <p>I translate ambiguous problems into crisp narratives, aligning teams around confident releases.</p>
+          <div class="badge">Builder</div>
+          <h3>Hands-on projects</h3>
+          <p>Frequent, lightweight repos for trying ideas fast—bots, Android work, Minecraft mods, and web starters.</p>
         </div>
         <div class="card">
-          <div class="badge">Delivery</div>
-          <h3>Design to build</h3>
-          <p>Pairing Figma fluency with component-driven code keeps the handoff tight and the UI faithful.</p>
+          <div class="badge">Stack</div>
+          <h3>Polyglot</h3>
+          <p>TypeScript, Kotlin, PHP, Python, Java, and more—picking the right tool for each experiment.</p>
         </div>
         <div class="card">
-          <div class="badge">Impact</div>
-          <h3>Measurable outcomes</h3>
-          <p>Experiments and instrumentation ensure every release has a learning loop attached.</p>
+          <div class="badge">Community</div>
+          <h3>Open by default</h3>
+          <p>Public repos, forks, and contributions that invite others to explore and build on top.</p>
         </div>
       </div>
     </section>
 
     <section class="section" id="projects">
       <div class="section-header">
-        <h2>Selected Projects</h2>
-        <p>Recent collaborations across SaaS, fintech, and creative tooling. Each blends intent with strong execution.</p>
+        <h2>Repositories</h2>
+        <p>Top public repos from GitHub, sorted by stars and recent updates. Click any card to open it on GitHub.</p>
       </div>
-      <div class="grid">
+      <div class="grid" id="projects-grid">
         <div class="card">
-          <div class="badge">SaaS · 2024</div>
-          <h3>Insight OS</h3>
-          <p>Decision intelligence workspace with adaptive dashboards, live collaboration, and a modular design system.</p>
-          <div class="stack">
-            <span class="chip">React</span>
-            <span class="chip">Typescript</span>
-            <span class="chip">Design tokens</span>
-          </div>
-        </div>
-        <div class="card">
-          <div class="badge">Fintech · 2023</div>
-          <h3>Flow Banking</h3>
-          <p>Reimagined account opening with guided flows, friction-aware forms, and humane status updates.</p>
-          <div class="stack">
-            <span class="chip">Next.js</span>
-            <span class="chip">Motion</span>
-            <span class="chip">UX research</span>
-          </div>
-        </div>
-        <div class="card">
-          <div class="badge">Creative · 2023</div>
-          <h3>Palette Studio</h3>
-          <p>Color exploration tool with generative palettes, contrast checks, and exportable theme packages.</p>
-          <div class="stack">
-            <span class="chip">WebGL</span>
-            <span class="chip">Accessibility</span>
-            <span class="chip">Storybook</span>
-          </div>
+          <div class="badge">Loading</div>
+          <h3>Fetching live data...</h3>
+          <p>This pulls from repos.json (fallback) or the GitHub API.</p>
         </div>
       </div>
     </section>
 
     <section class="section" id="skills">
       <div class="section-header">
-        <h2>Skills</h2>
-        <p>Systems thinking plus tactile craft. Strong pairing with engineering and research.</p>
+        <h2>Languages</h2>
+        <p>Mix of languages across the public repositories. Percentages are relative to the most-used language.</p>
       </div>
-      <div class="skills">
+      <div class="skills" id="skills-grid">
         <div class="skill">
           <header>
-            <strong>Interface Design</strong>
-            <span>92%</span>
+            <strong>Loading</strong>
+            <span>--</span>
           </header>
-          <div class="bar" style="--value: 92%;"><span></span></div>
-        </div>
-        <div class="skill">
-          <header>
-            <strong>Frontend Engineering</strong>
-            <span>88%</span>
-          </header>
-          <div class="bar" style="--value: 88%;"><span></span></div>
-        </div>
-        <div class="skill">
-          <header>
-            <strong>Design Systems</strong>
-            <span>90%</span>
-          </header>
-          <div class="bar" style="--value: 90%;"><span></span></div>
-        </div>
-        <div class="skill">
-          <header>
-            <strong>Product Strategy</strong>
-            <span>82%</span>
-          </header>
-          <div class="bar" style="--value: 82%;"><span></span></div>
+          <div class="bar" style="--value: 45%;"><span></span></div>
         </div>
       </div>
     </section>
 
     <section class="section" id="experience">
       <div class="section-header">
-        <h2>Experience</h2>
-        <p>Leading with clarity, collaborating with engineers, and keeping teams shipping.</p>
+        <h2>Highlights</h2>
+        <p>Milestones and activity pulled from the GitHub profile and repository history.</p>
       </div>
       <div class="timeline">
         <div class="timeline-item">
-          <small>2022 — Now</small>
-          <h3>Senior Product Designer · Northwind</h3>
-          <p>Owned end-to-end experience for complex analytics suite, introducing a design system that cut build time by 32%.</p>
+          <small>2014 — now</small>
+          <h3>Joined GitHub as @aimanzahar</h3>
+          <p>Experimenting in public with open-source projects and forks.</p>
         </div>
         <div class="timeline-item">
-          <small>2019 — 2022</small>
-          <h3>Product Engineer · Waveform</h3>
-          <p>Prototyped interactions in code, launched motion patterns, and delivered responsive layouts across platforms.</p>
+          <small>Recent</small>
+          <h3>Active across languages</h3>
+          <p>TypeScript, Kotlin, PHP, Java, and Python projects updated throughout 2023–2025.</p>
         </div>
         <div class="timeline-item">
-          <small>2016 — 2019</small>
-          <h3>UX Designer · Studio Orbit</h3>
-          <p>Worked with cross-functional teams on research-driven redesigns for finance, retail, and creative clients.</p>
+          <small>Public work</small>
+          <h3><span id="public-repo-count">37</span> public repositories</h3>
+          <p>Utilities, mods, bots, and web starters that others can explore or reuse.</p>
         </div>
       </div>
     </section>
@@ -718,27 +705,24 @@
     <section class="section" id="contact">
       <div class="section-header">
         <h2>Contact</h2>
-        <p>Ready to collaborate or need a fresh set of eyes? Send a note.</p>
+        <p>Want to collaborate or share feedback on a repo? Reach out via GitHub or send a quick note.</p>
       </div>
       <div class="contact">
         <div class="card">
-          <div class="badge">Availability</div>
-          <h3>Freelance & product partnerships</h3>
-          <p>Based in Berlin. Open to remote-first teams and short onsite sprints.</p>
+          <div class="badge">GitHub</div>
+          <h3>Follow or open an issue</h3>
+          <p>Best place to connect is the GitHub profile for @aimanzahar.</p>
           <div class="stack">
-            <span class="chip">UX strategy</span>
-            <span class="chip">Prototyping</span>
-            <span class="chip">Design systems</span>
+            <a class="chip" href="https://github.com/aimanzahar" target="_blank" rel="noreferrer">Profile</a>
+            <a class="chip" href="https://github.com/aimanzahar?tab=repositories" target="_blank" rel="noreferrer">Repositories</a>
           </div>
         </div>
         <div class="card">
           <form>
             <label for="name">Name</label>
             <input id="name" name="name" type="text" placeholder="Your name" required>
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" placeholder="you@example.com" required>
             <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Project details or questions" required></textarea>
+            <textarea id="message" name="message" placeholder="Drop a note; include a repo link or context." required></textarea>
             <button class="button" type="submit">Send message</button>
           </form>
         </div>
@@ -747,12 +731,173 @@
   </main>
 
   <footer>
-    <span>© 2024 Alex Taylor — Let’s build something intentional.</span>
+    <span>© 2024 Aiman — Data pulled from github.com/aimanzahar.</span>
     <div style="display:flex;gap:10px;flex-wrap:wrap;">
-      <a href="mailto:alex.taylor@example.com" style="color:var(--muted);text-decoration:none;">Email</a>
-      <a href="https://www.linkedin.com" style="color:var(--muted);text-decoration:none;">LinkedIn</a>
-      <a href="https://www.dribbble.com" style="color:var(--muted);text-decoration:none;">Dribbble</a>
+      <a href="https://github.com/aimanzahar" style="color:var(--muted);text-decoration:none;" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://github.com/aimanzahar?tab=repositories" style="color:var(--muted);text-decoration:none;" target="_blank" rel="noreferrer">Repositories</a>
     </div>
   </footer>
+
+  <script>
+    (async () => {
+      const heroName = document.getElementById("hero-name");
+      const tagline = document.getElementById("tagline");
+      const heroDescription = document.getElementById("hero-description");
+      const repoCount = document.getElementById("repo-count");
+      const followersCount = document.getElementById("followers-count");
+      const languageCount = document.getElementById("language-count");
+      const publicRepoCount = document.getElementById("public-repo-count");
+      const avatar = document.getElementById("avatar");
+      const projectsGrid = document.getElementById("projects-grid");
+      const skillsGrid = document.getElementById("skills-grid");
+
+      const fallbackProfile = { public_repos: 37, followers: 0, name: "Aiman", login: "aimanzahar" };
+
+      async function fetchJSON(url) {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`Request failed: ${res.status}`);
+        return res.json();
+      }
+
+      async function loadProfile() {
+        try {
+          return await fetchJSON("https://api.github.com/users/aimanzahar");
+        } catch (err) {
+          return fallbackProfile;
+        }
+      }
+
+      async function loadRepos() {
+        try {
+          return await fetchJSON("repos.json");
+        } catch (_) {
+          try {
+            return await fetchJSON("https://api.github.com/users/aimanzahar/repos?per_page=100&sort=updated");
+          } catch (err) {
+            return [];
+          }
+        }
+      }
+
+      function formatDate(value) {
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return "—";
+        return date.toLocaleString("en", { month: "short", year: "numeric" });
+      }
+
+      function renderProfile(profile, repos) {
+        const languages = new Set(repos.map((repo) => repo.language).filter(Boolean));
+        if (heroDescription) {
+          heroDescription.textContent = "Public repos, followers, and languages sourced directly from GitHub.";
+        }
+        if (heroName) {
+          heroName.textContent = `${profile.name || "Aiman"} — @${profile.login || "aimanzahar"}`;
+        }
+        if (tagline) {
+          tagline.textContent = `Open-source projects, forks, and experiments maintained by @${profile.login || "aimanzahar"}.`;
+        }
+        if (repoCount) repoCount.textContent = profile.public_repos ?? repos.length ?? 0;
+        if (followersCount) followersCount.textContent = profile.followers ?? 0;
+        if (languageCount) languageCount.textContent = languages.size || "—";
+        if (publicRepoCount) publicRepoCount.textContent = profile.public_repos ?? repos.length ?? 0;
+        if (avatar && profile.avatar_url) avatar.src = profile.avatar_url;
+      }
+
+      function renderRepos(repos) {
+        if (!projectsGrid) return;
+        projectsGrid.innerHTML = "";
+        const ownRepos = repos.filter((repo) => !repo.fork);
+
+        if (!ownRepos.length) {
+          const empty = document.createElement("div");
+          empty.className = "card";
+          empty.innerHTML = '<div class="badge">No data</div><h3>No repositories found</h3><p>Unable to load repository data right now.</p>';
+          projectsGrid.appendChild(empty);
+          return;
+        }
+
+        const sorted = [...ownRepos]
+          .sort((a, b) => {
+            const starDiff = (b.stargazers_count || 0) - (a.stargazers_count || 0);
+            if (starDiff !== 0) return starDiff;
+            const timeA = new Date(a.pushed_at || a.updated_at || 0).getTime() || 0;
+            const timeB = new Date(b.pushed_at || b.updated_at || 0).getTime() || 0;
+            return timeB - timeA;
+          })
+          .slice(0, 6);
+
+        sorted.forEach((repo) => {
+          const card = document.createElement("a");
+          card.className = "card";
+          card.href = repo.html_url || "#";
+          card.target = "_blank";
+          card.rel = "noreferrer";
+          const desc = repo.description || "No description provided.";
+          const language = repo.language || "Repository";
+          const updated = repo.pushed_at ? formatDate(repo.pushed_at) : "—";
+
+          card.innerHTML = `
+            <div class="badge">${language}</div>
+            <h3>${repo.name}</h3>
+            <p>${desc}</p>
+            <div class="stack">
+              <span class="chip">⭐ ${repo.stargazers_count || 0}</span>
+              <span class="chip">Forks ${repo.forks_count || 0}</span>
+              <span class="chip">Updated ${updated}</span>
+            </div>
+          `;
+          projectsGrid.appendChild(card);
+        });
+      }
+
+      function renderLanguages(repos) {
+        if (!skillsGrid) return;
+        skillsGrid.innerHTML = "";
+        const counts = repos.reduce((acc, repo) => {
+          if (!repo.language) return acc;
+          acc[repo.language] = (acc[repo.language] || 0) + 1;
+          return acc;
+        }, {});
+        const entries = Object.entries(counts)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 6);
+        const max = entries[0]?.[1] || 1;
+
+        if (!entries.length) {
+          const card = document.createElement("div");
+          card.className = "skill";
+          card.innerHTML = '<header><strong>No data</strong><span>--</span></header><div class="bar" style="--value: 40%;"><span></span></div>';
+          skillsGrid.appendChild(card);
+          return;
+        }
+
+        entries.forEach(([lang, count]) => {
+          const percent = Math.round((count / max) * 100);
+          const skill = document.createElement("div");
+          skill.className = "skill";
+          skill.innerHTML = `
+            <header>
+              <strong>${lang}</strong>
+              <span>${count} repos</span>
+            </header>
+            <div class="bar" style="--value: ${percent}%;">
+              <span></span>
+            </div>
+          `;
+          skillsGrid.appendChild(skill);
+        });
+      }
+
+      try {
+        const [profile, repos] = await Promise.all([loadProfile(), loadRepos()]);
+        const ownRepos = repos.filter((repo) => !repo.fork);
+        renderProfile(profile, ownRepos);
+        renderRepos(ownRepos);
+        renderLanguages(ownRepos);
+      } catch (err) {
+        console.error("Failed to load GitHub data", err);
+      }
+    })();
+  </script>
 </body>
 </html>
